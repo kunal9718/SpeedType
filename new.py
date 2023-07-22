@@ -16,12 +16,12 @@ def play_game():
    import game
 
 label1 = Label(root, text="Welcome To Typing Master", font="comicsanms 25 bold",fg="#FFC300",bg="#001D3D",anchor="center")
-label1.pack(pady=7)    #welcome text
+label1.pack(pady=7)   
 
 label2 = Label(root, text="Instructions: Enter the given words in limited time and find your typing speed at the end of the game. Enjoy!!", font="comicsanms 15 italic",fg="grey",bg="#001D3D",anchor="center",wraplength=500)
-label2.pack(pady=20)      #instructions to play game
+label2.pack(pady=20)   
 
-play = Image.open("play.png")                  #play button  
+play = Image.open("play.png")                   
 resize_image = play.resize((224, 87))
 play = ImageTk.PhotoImage(resize_image)
 play_button=Button(root, image=play,borderwidth=0,bg="#001D3D",command=play_game,bd=0,anchor="center")

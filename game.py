@@ -18,25 +18,25 @@ words=['apple','pear','pair','mango','car','bike','cat','dog','horse','fan','air
        'hair','sudden','karachi','for','today','that','yesterday','fork','door','color','floor','flour','grape',
        'duck','horn','crown','fish','fly','plain']
 
-pygame.mixer.init()       #initializing the mixer for sound
+pygame.mixer.init()     
 
 def time():
     global timeleft,matched
     if(timeleft>0):
-        timeleft-=1                   #it will run the time counter and -1 from its value after each sec
-        timercount.configure(text=timeleft)     #it will display the change in counter value after each sec
-        timercount.after(1000,time)          #1000ms = 1 sec
+        timeleft-=1                
+        timercount.configure(text=timeleft)     
+        timercount.after(1000,time)          
         if (timeleft<11):
             timercount.configure(fg="red")
             timer.configure(fg="red")
         if timeleft==10:
-            pygame.mixer.music.load("countdown1.mp3")     #countdown sound
+            pygame.mixer.music.load("countdown1.mp3")     
             pygame.mixer.music.play(loops=0)
     else:
-        scorecount.configure(text=matched)                #change in score count and show after time is up
+        scorecount.configure(text=matched)                
         scorelabel.configure(text="You enter\tWPM")
         if matched>=35 and matched<=40:
-            feedback.configure(text="Your typing speed is average")            #feedback on last
+            feedback.configure(text="Your typing speed is average")            
         elif matched>=65:
             feedback.configure(text="Your typing speed is above average")
         else:
@@ -45,7 +45,7 @@ def time():
         retry=messagebox.askretrycancel('Notification','Do you want to retry?')
         
         if retry==True:
-            timeleft=60                                                    #RETRY BOX coding
+            timeleft=60                                                    
             matched=0
             feedback.configure(text='')
             scorecount.configure(text='')
@@ -60,55 +60,52 @@ def startGame(event):
 
     global matched,not_matched
 
-    if timeleft==60:        #it will call the func time
+    if timeleft==60:        
         time()
         
     if(wordentry.get() == word["text"]):
-        matched+=1            #if you enter correct word then it will be count otherwise else loop will run
+        matched+=1           
     elif(wordentry.get() != word["text"]):
         not_matched+=1
         pygame.mixer.music.load("buzzer1.mp3")     
-        pygame.mixer.music.play(loops=0)           #it will play sound when you enter wrong word
+        pygame.mixer.music.play(loops=0)           
 
-    random.shuffle(words)              #it will shuffle words in a list
-    word.configure(text=words[0])        #it will print those shuffled words one by one
-    wordentry.delete(0,END)         #after user typed the word and pressed enter key then entry box will automatically cleared 
-    label.configure(text="")         #After starting game instruction below entry will remove
+    random.shuffle(words)              
+    word.configure(text=words[0])        
+    wordentry.delete(0,END)         
+    label.configure(text="")         
          
     
 h1=Label(root, text="Typing Master", bg="#001D3D", fg="#FFC300" ,font="comicsanms 24 bold", anchor="center")
-h1.pack(pady=10)             #first heading
+h1.pack(pady=10)             
 
 word=Label(root, text=words[0], font="comicsanms 20 bold", fg="#FFD60A", bg="#001D3D",width=15,anchor="center")
-word.place(y=150,x=40)            #words that we have to enter
-
+word.place(y=150,x=40)            
 wordentry=Entry(root,font="comicsanms 18 bold",fg="grey",bg="#001D3D", justify="center",bd=4)
-wordentry.place(x=40,y=200)#entry box where we will enter words
+wordentry.place(x=40,y=200)
 
 
 timer=Label(root, text="Timer:",fg="green", bg="#001D3D", font="comicsanms 18 bold")
-timer.place(x=470, y=100)         #timer heading
+timer.place(x=470, y=100)         
 
 timercount=Label(root, text="60",fg="green", bg="#001D3D", font="comicsanms 16 bold")
-timercount.place(x=495, y=140)         #timer count below its heading
+timercount.place(x=495, y=140)         
 
 label=Label(root, text="Type word and Hit enter to start the game", bg="#001D3D", fg="grey", font="comicsanms 10 italic")
-label.place(x=68,y=250) #instruction 1 for user below entry label at starting of game
+label.place(x=68,y=250) 
 
-
-
-matched=0             #variables used in this program
+matched=0             
 not_matched=0
 timeleft=60
 
 scorelabel=Label(root, text="", bg="#001D3D", fg="#FFC300", font="comicsanms 17 bold")
-scorelabel.place(x=50,y=310)                   #text which will appear after time is up
+scorelabel.place(x=50,y=310)                   
 
 scorecount=Label(root, text="", bg="#001D3D", fg="#FFC300", font="comicsanms 17 bold")
-scorecount.place(x=190,y=310)                #number of wpm score which will in between the text of scorelabel
+scorecount.place(x=190,y=310)               
 
 feedback=Label(root, text="",bg="#001D3D",fg="#FFC300",font="comicsanms 12 bold")
-feedback.place(x=53,y=350)        #it will display the text which will tell your typing speed is average or not 
+feedback.place(x=53,y=350)       
 
 
 
